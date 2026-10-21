@@ -224,7 +224,7 @@ form.onsubmit=async e=>{
     btn.textContent='Sending…';
 
     try{
-        const r=await fetch('/api/enquiry',{
+        const r=await fetch('https://dharana-api.sushilsb.workers.dev/api/enquiry',{
             method:'POST',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify(Object.fromEntries(new FormData(form)))
