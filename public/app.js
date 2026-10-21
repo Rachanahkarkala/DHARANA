@@ -148,7 +148,7 @@ gallery.map((g,i)=>'<div class="gallery-item reveal" data-gallery="'+i+'"><img l
 '<div class="field"><label>Email</label><input name="email" type="email" required maxlength="200"></div>'+
 '<div class="field"><label>Phone Number</label><input name="phone" required maxlength="30"></div>'+
 '<div class="field"><label>What are you looking for?</label>'+
-'<select name="looking" required><option value="">Select one</option>'+
+'<select name="looking_for" required><option value="">Select one</option>'+
 '<option>Coworking</option><option>Study Space</option><option>Private Office</option>'+
 '<option>Meeting Room</option><option>Training / Event</option>'+
 '<option>Partnership</option><option>General Enquiry</option></select></div>'+
