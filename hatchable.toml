@@ -1,5 +1,0 @@
-[[config]]
-name = "dharana_contact_email"
-type = "email"
-label = "Dharana contact email"
-help = "Add the real enquiry inbox when it is available."
