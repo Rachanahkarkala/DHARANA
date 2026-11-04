@@ -23,3 +23,89 @@
     max-height: 100%;
     object-fit: contain;
 }
+
+/* Dharana Spaces brand marks */
+.logo-lockup .brand-emblem {
+  display: block;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  object-fit: contain;
+}
+.footer .logo-lockup .brand-emblem {
+  width: 58px;
+  height: 58px;
+  flex-basis: 58px;
+}
+.intro-logo {
+  width: 190px;
+  height: 205px;
+  margin: 0 auto 24px;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  display: grid;
+  place-items: center;
+}
+.intro-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Dharana AI chat */
+.dharana-chat { position: fixed; right: 26px; bottom: 26px; z-index: 85; font-family: 'DM Sans', sans-serif; }
+.chat-launcher {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 58px; padding: 0 21px; border: 1px solid rgba(255,255,255,.28);
+  border-radius: 999px; background: var(--green); color: var(--cream);
+  box-shadow: 0 14px 38px rgba(6,63,56,.24); cursor: pointer;
+  font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+  transition: transform .25s, background .25s, box-shadow .25s;
+}
+.chat-launcher:hover { transform: translateY(-3px); background: var(--green2); box-shadow: 0 18px 42px rgba(6,63,56,.3); }
+.chat-launcher-icon { display: grid; place-items: center; width: 25px; height: 25px; border: 1px solid rgba(244,165,181,.65); border-radius: 50%; color: var(--pink); font-size: 16px; }
+.chat-launcher.active { display: none; }
+.chat-panel {
+  position: absolute; right: 0; bottom: 0; display: flex; flex-direction: column;
+  width: min(390px, calc(100vw - 32px)); height: min(590px, calc(100dvh - 115px));
+  min-height: 420px; overflow: hidden; border: 1px solid rgba(6,63,56,.13);
+  border-radius: 18px; background: var(--cream); box-shadow: 0 24px 80px rgba(6,63,56,.24);
+  opacity: 0; visibility: hidden; transform: translateY(12px) scale(.98);
+  transform-origin: bottom right; transition: opacity .2s, transform .2s, visibility .2s;
+}
+.chat-panel.open { opacity: 1; visibility: visible; transform: none; }
+.chat-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 17px; background: var(--green); color: var(--cream); }
+.chat-header-brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
+.chat-header-brand img { width: 43px; height: 43px; object-fit: contain; flex: 0 0 43px; }
+.chat-header-brand div { display: grid; gap: 3px; }
+.chat-header-brand strong { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; }
+.chat-header-brand small { color: rgba(255,249,242,.72); font-size: 10px; letter-spacing: .04em; }
+.chat-close { border: 0; background: transparent; color: var(--cream); font-size: 27px; line-height: 1; cursor: pointer; padding: 5px 8px; }
+.chat-messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 11px; padding: 17px 15px 12px; }
+.chat-message { max-width: 88%; padding: 11px 13px; border-radius: 13px; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.chat-message p { margin: 0; white-space: pre-wrap; }
+.chat-message.assistant { align-self: flex-start; background: #f4e9df; color: var(--green); border-bottom-left-radius: 4px; }
+.chat-message.user { align-self: flex-end; background: var(--green); color: #fff9f2; border-bottom-right-radius: 4px; }
+.chat-message.typing { opacity: .65; font-style: italic; }
+.chat-suggestions { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 15px 12px; }
+.chat-suggestions button { border: 1px solid rgba(6,63,56,.2); border-radius: 999px; background: transparent; color: var(--green); padding: 7px 10px; font-size: 10px; cursor: pointer; transition: .2s; }
+.chat-suggestions button:hover { background: var(--blush); border-color: var(--pink); }
+.chat-form { display: flex; align-items: center; gap: 8px; margin: 0 13px; padding: 8px; border: 1px solid rgba(6,63,56,.18); border-radius: 12px; background: #fff; }
+.chat-form input { flex: 1; width: 0; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--green); padding: 8px 6px; font-size: 13px; }
+.chat-form button { width: 37px; height: 37px; flex: 0 0 37px; border: 0; border-radius: 9px; background: var(--green); color: white; font-size: 21px; cursor: pointer; }
+.chat-form button:disabled { opacity: .55; cursor: wait; }
+.chat-footnote { padding: 9px 12px 11px; color: rgba(6,63,56,.55); text-align: center; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+@media(max-width:900px) {
+  .dharana-chat { right: 18px; bottom: 82px; }
+  .chat-panel { height: min(570px, calc(100dvh - 165px)); }
+}
+@media(max-width:620px) {
+  .intro-logo { width: 168px; height: 182px; margin-bottom: 18px; }
+  .logo-lockup .brand-emblem { width: 40px; height: 40px; flex-basis: 40px; }
+  .footer .logo-lockup .brand-emblem { width: 52px; height: 52px; flex-basis: 52px; }
+  .dharana-chat { right: 14px; bottom: 78px; }
+  .chat-panel { width: min(390px, calc(100vw - 28px)); height: min(560px, calc(100dvh - 155px)); min-height: 390px; }
+  .chat-launcher { min-height: 52px; padding: 0 16px; }
+}

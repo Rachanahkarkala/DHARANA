@@ -34,7 +34,7 @@ const gallery=[
 document.getElementById('site').innerHTML=
 '<div class="intro" id="intro">'+
 '<div class="intro-inner">'+
-'<div class="intro-logo"><img src="/images/dharana-logo.png" alt="Dharana Spaces logo"></div>'+
+'<div class="intro-logo"><img src="/images/dharana-full-logo.png" alt="Dharana Spaces logo"></div>'+
 '<div class="eyebrow">Dharana Spaces</div>'+
 '<h1 class="intro-title serif">COME TO DHARANA.</h1>'+
 '<p class="intro-sub">A space to focus, create and grow.</p>'+
@@ -43,7 +43,7 @@ document.getElementById('site').innerHTML=
 
 '<header class="nav" id="nav">'+
 '<div class="wrap nav-row">'+
-'<a href="#home" class="logo-lockup"><span class="mark">D</span><span>DHARANA SPACES</span></a>'+
+'<a href="#home" class="logo-lockup"><img class="brand-emblem" src="/images/dharana-emblem.png" alt=""><span>DHARANA SPACES</span></a>'+
 '<nav class="nav-links">'+
 '<a href="#home">Home</a><a href="#about">About</a><a href="#amenities">Amenities</a>'+
 '<a href="#community">Community</a><a href="#gallery">Gallery</a>'+
@@ -158,7 +158,7 @@ gallery.map((g,i)=>'<div class="gallery-item reveal" data-gallery="'+i+'"><img l
 '</form></div></section></main>'+
 
 '<footer class="footer"><div class="wrap footer-grid">'+
-'<div><div class="logo-lockup"><span class="mark">D</span><span>DHARANA SPACES</span></div>'+
+'<div><div class="logo-lockup"><img class="brand-emblem" src="/images/dharana-emblem.png" alt=""><span>DHARANA SPACES</span></div>'+
 '<h3 class="serif">COME TO DHARANA.</h3>'+
 '<p style="line-height:1.7;max-width:430px;opacity:.78">A premium space to focus, connect and create what’s next.</p></div>'+
 '<div><div class="eyebrow">Explore</div><div class="footer-links" style="margin-top:18px">'+
@@ -167,7 +167,7 @@ gallery.map((g,i)=>'<div class="gallery-item reveal" data-gallery="'+i+'"><img l
 '<div><div class="eyebrow">Visit</div><div style="margin-top:18px;line-height:1.7;font-size:13px">80883 55784<br>Kadadi’s Haven, Prakruthi Layout,<br>Bengaluru</div></div>'+
 '</div><div class="wrap"><small>© 2026 Dharana Spaces. All rights reserved.</small></div></footer>'+
 
-'<a class="phone-cta" href="tel:+918088355784">Call Dharana</a>'+
+'<a class="phone-cta" href="tel:+918088355784">Call Dharana</a>'+ `\n<div class="dharana-chat" id="dharanaChat">\n<button class="chat-launcher" id="chatLauncher" type="button" aria-label="Chat with Dharana assistant" aria-expanded="false">\n  <span class="chat-launcher-icon" aria-hidden="true">✦</span><span class="chat-launcher-label">Ask Dharana</span>\n</button>\n<section class="chat-panel" id="chatPanel" aria-label="Dharana Spaces assistant" aria-hidden="true">\n  <header class="chat-header">\n    <div class="chat-header-brand"><img src="/images/dharana-emblem.png" alt=""><div><strong>Dharana Assistant</strong><small>Here to help you find your space</small></div></div>\n    <button class="chat-close" id="chatClose" type="button" aria-label="Close chat">×</button>\n  </header>\n  <div class="chat-messages" id="chatMessages" aria-live="polite">\n    <div class="chat-message assistant"><p>Hello! I'm the Dharana Spaces assistant. Ask me about our workspaces, study spaces, facilities, community or location.</p></div>\n  </div>\n  <div class="chat-suggestions" id="chatSuggestions">\n    <button type="button">What is Dharana Spaces?</button>\n    <button type="button">Where are you located?</button>\n    <button type="button">What facilities do you offer?</button>\n    <button type="button">What is Versuance?</button>\n  </div>\n  <form class="chat-form" id="chatForm">\n    <input id="chatInput" type="text" maxlength="1500" autocomplete="off" placeholder="Ask us anything..." aria-label="Your question" required>\n    <button id="chatSend" type="submit" aria-label="Send message">↑</button>\n  </form>\n  <div class="chat-footnote">Dharana Spaces · Where Minds Meet</div>\n</section>\n</div>`+
 '<div class="lightbox" id="lightbox"><button id="lightboxClose">×</button><img id="lightboxImg" alt="Dharana gallery image"></div>'+
 '<div class="cursor-dot" id="cursorDot"></div><div class="trail" id="trail"></div>';
 
@@ -243,4 +243,77 @@ form.onsubmit=async e=>{
         btn.innerHTML='Send Enquiry <span>→</span>';
     }
 };
+const chatLauncher=document.getElementById('chatLauncher');
+const chatPanel=document.getElementById('chatPanel');
+const chatClose=document.getElementById('chatClose');
+const chatMessagesEl=document.getElementById('chatMessages');
+const chatForm=document.getElementById('chatForm');
+const chatInput=document.getElementById('chatInput');
+const chatSend=document.getElementById('chatSend');
+const chatSuggestions=document.getElementById('chatSuggestions');
+const chatHistory=[];
+
+function setChatOpen(open){
+    chatPanel.classList.toggle('open',open);
+    chatPanel.setAttribute('aria-hidden',String(!open));
+    chatLauncher.setAttribute('aria-expanded',String(open));
+    chatLauncher.classList.toggle('active',open);
+    if(open) setTimeout(()=>chatInput.focus(),180);
+}
+chatLauncher.onclick=()=>setChatOpen(!chatPanel.classList.contains('open'));
+chatClose.onclick=()=>setChatOpen(false);
+
+function addChatMessage(role,text){
+    const item=document.createElement('div');
+    item.className='chat-message '+role;
+    const paragraph=document.createElement('p');
+    paragraph.textContent=text;
+    item.appendChild(paragraph);
+    chatMessagesEl.appendChild(item);
+    chatMessagesEl.scrollTop=chatMessagesEl.scrollHeight;
+    return item;
+}
+
+chatSuggestions.querySelectorAll('button').forEach(button=>{
+    button.addEventListener('click',()=>{
+        chatInput.value=button.textContent;
+        chatForm.requestSubmit();
+    });
+});
+
+chatForm.onsubmit=async event=>{
+    event.preventDefault();
+    const question=chatInput.value.trim();
+    if(!question||chatSend.disabled)return;
+
+    addChatMessage('user',question);
+    chatHistory.push({role:'user',content:question});
+    chatInput.value='';
+    chatSuggestions.style.display='none';
+    chatSend.disabled=true;
+    chatSend.textContent='…';
+    const loading=addChatMessage('assistant typing','Thinking…');
+
+    try{
+        const response=await fetch('https://dharana-api.sushilsb.workers.dev/api/chat',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({messages:chatHistory.slice(-10)})
+        });
+        const result=await response.json();
+        if(!response.ok)throw new Error(result.error||'Unable to reach the assistant.');
+        loading.remove();
+        addChatMessage('assistant',result.reply);
+        chatHistory.push({role:'assistant',content:result.reply});
+    }catch(error){
+        loading.remove();
+        addChatMessage('assistant',error.message||'Sorry, something went wrong. Please try again.');
+    }finally{
+        chatSend.disabled=false;
+        chatSend.textContent='↑';
+        chatMessagesEl.scrollTop=chatMessagesEl.scrollHeight;
+        chatInput.focus();
+    }
+};
+
 })();
