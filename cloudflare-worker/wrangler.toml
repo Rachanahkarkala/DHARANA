@@ -1,0 +1,16 @@
+
+name = "dharana-api"
+main = "worker.js"
+compatibility_date = "2026-10-21"
+compatibility_flags = ["nodejs_compat"]
+preview_urls = false
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+id = "695aebd1f8044fef8c144fe3814110fa"
