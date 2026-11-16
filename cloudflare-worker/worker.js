@@ -139,7 +139,7 @@ When asked what Dharana offers, explain the relevant options in accessible langu
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
+            model: "openai/gpt-oss-120b",
             temperature: 0.35,
             max_tokens: 500,
             messages: [
